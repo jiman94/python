@@ -18,7 +18,7 @@ ENV PORT ${PORT:-8080}
 # Copy plugins, groovy and css to container
 COPY files/plugins.txt /var/jenkins_home/plugins.txt
 COPY groovy/custom.groovy /var/jenkins_home/init.groovy.d/
-COPY files/prometheus-jmx-config.yaml /var/jenkins_home
+#COPY files/prometheus-jmx-config.yaml /var/jenkins_home
 
 # Disable plugin banner on startup
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
@@ -26,7 +26,7 @@ RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 USER root
 
 RUN apk --no-cache add curl graphviz && \
-    curl -vSL https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${PROMETHEUS_JMX_JAR_VERSION}/jmx_prometheus_javaagent-${PROMETHEUS_JMX_JAR_VERSION}.jar -o /usr/share/jenkins/jmx_prometheus_javaagent.jar && \
+#    curl -vSL https://repo1.maven.org/maven2/io/prometheus/jmx/jmx_prometheus_javaagent/${PROMETHEUS_JMX_JAR_VERSION}/jmx_prometheus_javaagent-${PROMETHEUS_JMX_JAR_VERSION}.jar -o /usr/share/jenkins/jmx_prometheus_javaagent.jar && \
     chown jenkins:jenkins -R /usr/share/jenkins && \
     chown jenkins:jenkins -R /var/jenkins_home
 
