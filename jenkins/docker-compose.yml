@@ -1,0 +1,23 @@
+version: "3.1"
+
+services:
+  jenkins-agent:
+    container_name: jenkins-alpine
+    build: .
+    restart: always
+    networks:
+      - jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    tty: true
+    volumes:
+      - ./jenkins-data:/var/jenkins_home
+      - ./jenkins-docker-certs:/certs/client:ro
+ #     - /tmp/jenkins/agent:/home
+ #     - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      TZ: "Asia/Seoul"
+      
+networks:
+  jenkins:
